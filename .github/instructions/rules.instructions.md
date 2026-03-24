@@ -31,3 +31,16 @@ Prefer modern Java 25/26 practices:
 Use these links as references when needed:
 - https://jdk.java.net/25/
 - https://jdk.java.net/26/
+
+## Subagents Activation Rules
+
+### Test Runner Subagent
+- **When to activate**: Always activate the `test-runner` subagent in parallel when creating new code, classes, methods, or modifying existing functionality that could impact tests.
+- **Trigger patterns**: 
+  - Creating new classes (Controller, Service, Repository, Entity, DTO)
+  - Adding new methods or endpoints
+  - Modifying business logic
+  - Refactoring existing code
+  - Any change that could break existing functionality
+- **Purpose**: Run tests proactively to catch issues early and ensure code quality.
+- **Integration**: The subagent should run in parallel with code generation tasks and report results immediately after completion.

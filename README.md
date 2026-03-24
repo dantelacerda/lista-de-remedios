@@ -32,3 +32,15 @@ Os Model Context Protocol (MCP) Servers configurados para este projeto:
   - Uso: `mcp_context7_query-docs`, `mcp_context7_resolve-library-id`
   - Útil para consultar versões e padrões de bibliotecas em tempo real
 
+## Subagents
+
+Subagents automatizados para melhorar a qualidade do código:
+
+- **Test Runner** — Especialista em automação de testes
+  - Localização: `.github/agents/test-runner.md`
+  - Ativação: Automática em paralelo quando criando código novo
+  - Propósito: Executar testes proativamente e corrigir falhas
+  - Gatilhos: Criação de classes, métodos, endpoints ou modificações que possam impactar testes
+
+Para mais detalhes sobre configuração de subagents: `.github/agents/README.md`
+

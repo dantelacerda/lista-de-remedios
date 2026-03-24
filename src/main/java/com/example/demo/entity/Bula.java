@@ -34,6 +34,14 @@ public class Bula {
     @Column(nullable = false)
     private LocalDate validade;
 
+    @NotBlank
+    @Column(nullable = false, length = 100)
+    private String fabricante;
+
+    @NotNull
+    @Column(nullable = false)
+    private Double dosagem;
+
     /** Construtor sem argumentos exigido pelo JPA. */
     public Bula() {
     }
@@ -41,6 +49,13 @@ public class Bula {
     public Bula(String nome, LocalDate validade) {
         this.nome = nome;
         this.validade = validade;
+    }
+
+    public Bula(String nome, LocalDate validade, String fabricante, Double dosagem) {
+        this.nome = nome;
+        this.validade = validade;
+        this.fabricante = fabricante;
+        this.dosagem = dosagem;
     }
 
     public Long getId() {
@@ -67,17 +82,37 @@ public class Bula {
         this.validade = validade;
     }
 
+    public String getFabricante() {
+        return fabricante;
+    }
+
+    public void setFabricante(String fabricante) {
+        this.fabricante = fabricante;
+    }
+
+    public Double getDosagem() {
+        return dosagem;
+    }
+
+    public void setDosagem(Double dosagem) {
+        this.dosagem = dosagem;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Bula bula = (Bula) o;
-        return Objects.equals(id, bula.id);
+        return Objects.equals(id, bula.id) &&
+               Objects.equals(nome, bula.nome) &&
+               Objects.equals(validade, bula.validade) &&
+               Objects.equals(fabricante, bula.fabricante) &&
+               Objects.equals(dosagem, bula.dosagem);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, nome, validade, fabricante, dosagem);
     }
 }
 

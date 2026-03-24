@@ -23,9 +23,9 @@ public class BulaServiceImpl implements BulaService {
     @Override
     @Transactional
     public BulaDTO salvar(BulaDTO dto) {
-        var entity = new Bula(dto.nome(), dto.validade());
+        var entity = new Bula(dto.nome(), dto.validade(), dto.fabricante(), dto.dosagem());
         var saved = bulaRepository.save(entity);
-        return BulaDTO.of(saved.getId(), saved.getNome(), saved.getValidade());
+        return BulaDTO.of(saved.getId(), saved.getNome(), saved.getValidade(), saved.getFabricante(), saved.getDosagem());
     }
 
     @Override
@@ -36,7 +36,7 @@ public class BulaServiceImpl implements BulaService {
                 : bulaRepository.findByNomeContendo(nome.trim());
 
         return lista.stream()
-                .map(b -> BulaDTO.of(b.getId(), b.getNome(), b.getValidade()))
+                .map(b -> BulaDTO.of(b.getId(), b.getNome(), b.getValidade(), b.getFabricante(), b.getDosagem()))
                 .toList();
     }
 }
