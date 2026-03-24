@@ -1,6 +1,11 @@
-# lista-de-remedios
+# 📋 Lista de Remédios
 
-## Regras do projeto
+<div style="text-align: center; background: linear-gradient(45deg, #667eea 0%, #764ba2 100%); color: white; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
+  <h2>🏥 Sistema de Gerenciamento de Remédios</h2>
+  <p>Uma aplicação Spring Boot para gerenciar bulas e remédios de forma eficiente.</p>
+</div>
+
+## 📚 Regras do Projeto
 
 O diretório principal de regras e instruções é:
 
@@ -8,22 +13,22 @@ O diretório principal de regras e instruções é:
 - `.github/instructions/rules.instructions.md` (documento mestre com fontes de verdade)
 - `.github/instructions/docs/project-context.md` (contexto do produto e roadmap)
 
-### Uso
+### 🚀 Uso
 
 - Priorize os arquivos em `.github/instructions` para automatizações e revisões.
 - Confira `rules.instructions.md` para entender a hierarquia e onde encontrar a regra correta.
 
-## Stacks do projeto
+## 🛠️ Stacks do Projeto
 
 - `.github/instructions/rules/stack-description.md` (descrição completa de tecnologias e stack)
 
-### Passeio rápido
+### 🏃‍♂️ Passeio Rápido
 
 1. Leia `.github/instructions/rules.instructions.md`
 2. Verifique `.github/instructions/rules/stack-description.md`
 3. Aplique as regras de convenção nos controllers, services, repositories e DTOs
 
-## MCP Servers
+## 🔧 MCP Servers
 
 Os Model Context Protocol (MCP) Servers configurados para este projeto:
 
@@ -32,7 +37,7 @@ Os Model Context Protocol (MCP) Servers configurados para este projeto:
   - Uso: `mcp_context7_query-docs`, `mcp_context7_resolve-library-id`
   - Útil para consultar versões e padrões de bibliotecas em tempo real
 
-## Subagents
+## 🤖 Subagents
 
 Subagents automatizados para melhorar a qualidade do código:
 
@@ -43,4 +48,17 @@ Subagents automatizados para melhorar a qualidade do código:
   - Gatilhos: Criação de classes, métodos, endpoints ou modificações que possam impactar testes
 
 Para mais detalhes sobre configuração de subagents: `.github/agents/README.md`
+
+## Ferramentas de Desenvolvimento
+
+### RTK (Repository Toolkit)
+
+**RTK** é uma ferramenta de linha de comando que filtra e comprime saídas de comandos antes que cheguem ao contexto do LLM, ajudando a economizar tokens e melhorar a eficiência das interações com IA.
+
+- **Repositório**: [rtk-ai/rtk](https://github.com/rtk-ai/rtk)
+- **Função principal**: Filtragem e compressão de outputs de comandos para otimização de tokens
+- **Benefício**: Reduz o consumo de tokens em conversas com LLMs, mantendo apenas informações relevantes
+- **Uso no projeto**: Processamento inteligente de saídas de comandos Git e ferramentas de desenvolvimento
+- **Instalação**: `npm install -g @rtk-ai/rtk` ou via Homebrew
+- **Exemplo**: `rtk git status` retorna apenas informações essenciais, não o output completo do Git
 
