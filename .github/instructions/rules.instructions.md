@@ -32,6 +32,26 @@ Use these links as references when needed:
 - https://jdk.java.net/25/
 - https://jdk.java.net/26/
 
+## RTK Command Optimization
+
+**ALWAYS apply this rule when executing terminal commands:**
+
+1. **Before executing any command**: Check `.github/instructions/rules/rtk-rules.md` to see if there's an optimized RTK equivalent.
+2. **Command pattern matching**: If the user requests a command like `git status`, `npm test`, `docker ps`, etc., identify the base command.
+3. **RTK suggestion**: If the command exists in `rtk-rules.md`, suggest the RTK-optimized version first.
+   - Example: User asks "execute git status" → Suggest "rtk git status" (token-optimized)
+   - Example: User asks "run tests" → Suggest appropriate RTK test command
+   - Example: User asks "list dependencies" → Suggest "rtk pnpm list" or "rtk pip list"
+4. **Rationale**: Always mention the token savings benefit when suggesting RTK variants.
+5. **Execution**: When the user approves or doesn't object, execute the RTK command instead of the raw command.
+
+**Key RTK command categories to watch for:**
+- `git` commands (status, log, diff, add, commit, push, pull)
+- `test` commands (pytest, cargo test, npm test, etc.)
+- `lint` commands (eslint, prettier, typescript, etc.)
+- `docker` commands (ps, images, logs, compose, etc.)
+- `package manager` commands (pnpm list, pip list, bundle install, etc.)
+
 ## Subagents Activation Rules
 
 ### Test Runner Subagent
