@@ -32,49 +32,130 @@ Use these links as references when needed:
 - https://jdk.java.net/25/
 - https://jdk.java.net/26/
 
-## RTK Command Optimization
+## RTK Command Optimization (Required)
 
-**ALWAYS apply this rule when executing terminal commands:**
+**Use RTK for git-related commands to optimize token usage.**
 
-1. **Before executing any command**: Check `.github/instructions/rules/rtk-rules.md` to see if there's an optimized RTK equivalent.
-2. **Command pattern matching**: If the user requests a command like `git status`, `npm test`, `docker ps`, etc., identify the base command.
-3. **RTK suggestion**: If the command exists in `rtk-rules.md`, suggest the RTK-optimized version first.
-   - Example: User asks "execute git status" → Suggest "rtk git status" (token-optimized)
-   - Example: User asks "run tests" → Suggest appropriate RTK test command
-   - Example: User asks "list dependencies" → Suggest "rtk pnpm list" or "rtk pip list"
-4. **Rationale**: Always mention the token savings benefit when suggesting RTK variants.
-5. **Execution**: When the user approves or doesn't object, execute the RTK command instead of the raw command.
+1. **For git commands**, use RTK prefix:
+   - `rtk git add ...` (instead of `git add`)
+   - `rtk git commit -m "..."` (instead of `git commit`)
+   - `rtk git push` (instead of `git push`)
+   - `rtk git diff` (instead of `git diff`)
+   - `rtk git status` (instead of `git status`)
+   - `rtk git pull` (instead of `git pull`)
 
-**Key RTK command categories to watch for:**
-- `git` commands (status, log, diff, add, commit, push, pull)
-- `test` commands (pytest, cargo test, npm test, etc.)
+2. **Other commands** (test, docker, lint) should also use RTK equivalents when available.
+
+3. **Installation**: If RTK is not installed, mention this and use raw commands as fallback.
+
+**Commands covered by RTK:**
+- `git` commands (add, commit, push, pull, status, diff, log)
+- `test` commands (test, run tests, etc.)
 - `lint` commands (eslint, prettier, typescript, etc.)
 - `docker` commands (ps, images, logs, compose, etc.)
 - `package manager` commands (pnpm list, pip list, bundle install, etc.)
 
 ## Subagents Activation Rules
 
+These rules ensure code quality and security for every modification.
+
+### Workflow Before Commit
+
+**Execute in this order:**
+
+1. Code modified → Run: `test-runner` subagent (if code changes exist)
+2. Tests pass → Run: `revisor-de-codigo` subagent (code review)
+3. Review approved → Use RTK: `rtk git add`, `rtk git commit`, `rtk git push`
+4. Verify push completed
+
+---
+
 ### Test Runner Subagent
-- **When to activate**: Always activate the `test-runner` subagent in parallel when creating new code, classes, methods, or modifying existing functionality that could impact tests.
-- **Trigger patterns**: 
-  - Creating new classes (Controller, Service, Repository, Entity, DTO)
-  - Adding new methods or endpoints
-  - Modifying business logic
-  - Refactoring existing code
-  - Any change that could break existing functionality
-- **Purpose**: Run tests proactively to catch issues early and ensure code quality.
-- **Integration**: The subagent should run in parallel with code generation tasks and report results immediately after completion.
+
+**When to activate:**
+- Creating new classes (Controller, Service, Repository, Entity, DTO)
+- Adding or modifying methods or endpoints
+- Modifying business logic or service implementations
+- Refactoring existing code
+- Modifying repository queries
+- Any `.java` file change
+
+**Activation**:
+
+Use the `runSubagent` tool to trigger: `runSubagent(test-runner)`
+
+Wait for test results before proceeding to code review.
+
+**After test-runner completes:**
+- All tests pass → Proceed to code review
+- Tests fail → Fix issues and re-run tests
+- Environment issues → Document and address before committing
+
+---
 
 ### Code Reviewer Subagent (revisor-de-codigo)
-- **When to activate**: Activate the `revisor-de-codigo` subagent before commits or pull requests to ensure code quality standards.
-- **Trigger patterns**:
-  - Before creating a pull request
-  - Before committing significant changes
-  - When user explicitly requests code review
-  - When user asks to "check code quality"
-- **Purpose**: Perform senior-level code review for quality, security, and maintainability.
-- **Blocking nature**: Results should be considered before merging:
-  - 🔴 **Critical** issues: Must be fixed before merge
-  - 🟡 **Warnings**: Should be addressed before merge
-  - 💡 **Suggestions**: Can be addressed in future iterations
-- **Integration**: Can run in parallel after code is written, but should be consulted before final merge decision.
+
+**When to activate:**
+- Before any commit with code changes
+- Before creating pull requests
+- When user explicitly requests code review
+- After test-runner completes successfully
+- For any `.java`, `.xml`, or configuration file modifications
+
+**Activation**:
+
+Use the `runSubagent` tool to trigger: `runSubagent(revisor-de-codigo)`
+
+Review feedback and address critical/warning issues before committing.
+
+**Review feedback interpretation**:
+- Critical: Must be fixed before merge
+- Warnings: Should be fixed before merge
+- Suggestions: Can address later or per user preference
+
+---
+
+### Commit Flow (Step-by-Step)
+
+1. **Run test-runner** (if code changes)
+   ```
+   runSubagent(test-runner)
+   ```
+
+2. **Run revisor-de-codigo**
+   ```
+   runSubagent(revisor-de-codigo)
+   ```
+
+3. **Address critical/warning issues** if any
+
+4. **Use RTK for git commands**
+   ```bash
+   rtk git add <files>
+   rtk git commit -m "message"
+   rtk git push
+   ```
+
+---
+
+### Special Cases
+
+| Change Type | test-runner | revisor-de-codigo | RTK git |
+|---|---|---|---|
+| .java code changes | Required | Required | Required |
+| pom.xml, config | Required | Required | Required |
+| README, .md docs | Skip OK* | Required | Required |
+| Hotfixes | Required | Required | Required |
+
+*Skip test-runner for documentation only if ZERO code references or imports changed.
+
+---
+
+### Checklist Before Commit
+
+- [ ] test-runner executed and passed (if code changes)
+- [ ] revisor-de-codigo executed and approved
+- [ ] Critical/warning issues addressed
+- [ ] Using RTK for all git commands
+
+If any item is unchecked, do not commit.
