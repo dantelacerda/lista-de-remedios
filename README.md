@@ -149,3 +149,13 @@ Neste modo:
 - ✅ Nenhuma mudança de comportamento na aplicação
 - ⚠️ Seus comandos consumirão mais tokens em conversas com LLMs
 
+## 📧 Contatos
+
+Para dúvidas, sugestões ou suporte técnico:
+
+- **Email**: suporte@lista-remedios.test
+
+---
+
+**Última atualização**: 24 de março de 2026
+
