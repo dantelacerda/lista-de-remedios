@@ -106,9 +106,19 @@ Subagents automatizados para melhorar a qualidade do código:
 
 - **Test Runner** — Especialista em automação de testes
   - Localização: `.github/agents/test-runner.md`
-  - Ativação: Automática em paralelo quando criando código novo
+  - Ativação: Automática quando criando código novo (.java files)
   - Propósito: Executar testes proativamente e corrigir falhas
   - Gatilhos: Criação de classes, métodos, endpoints ou modificações que possam impactar testes
+
+- **Code Reviewer (revisor-de-codigo)** — Especialista em revisão de código
+  - Localização: `.github/agents/revisor-de-codigo.md`
+  - Ativação: Antes de commits ou pull requests
+  - Propósito: Revisar código para qualidade, segurança e manutenibilidade
+  - Gatilhos: Qualquer modificação de código antes de commit
+  - Checklist: Legibilidade, nomenclatura, duplicação, tratamento de erros, segredos expostos
+  - Feedback: Organizado por prioridade (Crítico, Avisos, Sugestões)
+
+**Workflow padrão**: test-runner → revisor-de-codigo → commit com RTK
 
 Para mais detalhes sobre configuração de subagents: `.github/agents/README.md`
 
