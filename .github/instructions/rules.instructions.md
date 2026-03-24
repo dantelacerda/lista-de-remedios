@@ -64,3 +64,17 @@ Use these links as references when needed:
   - Any change that could break existing functionality
 - **Purpose**: Run tests proactively to catch issues early and ensure code quality.
 - **Integration**: The subagent should run in parallel with code generation tasks and report results immediately after completion.
+
+### Code Reviewer Subagent (revisor-de-codigo)
+- **When to activate**: Activate the `revisor-de-codigo` subagent before commits or pull requests to ensure code quality standards.
+- **Trigger patterns**:
+  - Before creating a pull request
+  - Before committing significant changes
+  - When user explicitly requests code review
+  - When user asks to "check code quality"
+- **Purpose**: Perform senior-level code review for quality, security, and maintainability.
+- **Blocking nature**: Results should be considered before merging:
+  - 🔴 **Critical** issues: Must be fixed before merge
+  - 🟡 **Warnings**: Should be addressed before merge
+  - 💡 **Suggestions**: Can be addressed in future iterations
+- **Integration**: Can run in parallel after code is written, but should be consulted before final merge decision.

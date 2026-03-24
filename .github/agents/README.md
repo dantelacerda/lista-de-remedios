@@ -13,6 +13,13 @@ Este arquivo define como e quando os subagents devem ser ativados no projeto.
 - **Integração**: Paralela com tarefas de desenvolvimento
 - **Relatório**: Resultados de testes devem ser reportados imediatamente
 
+### Code Reviewer Subagent
+- **Arquivo**: `.github/agents/revisor-de-codigo.md`
+- **Ativação automática**: Antes de commits/pull requests
+- **Contexto**: Verificação de qualidade, segurança e estilo do código
+- **Integração**: Bloqueante - deve ser aprovado antes de mergear
+- **Relatório**: Feedback organizado por prioridade (Crítico, Avisos, Sugestões)
+
 ### Como adicionar novos subagents
 
 1. Criar arquivo em `.github/agents/[nome].md`

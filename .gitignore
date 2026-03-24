@@ -34,4 +34,4 @@ build/
 
 ### Agent Skills ###
 skills-lock.json
-.agents/skills/*/lock.json
+.agents/**

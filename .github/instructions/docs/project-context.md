@@ -75,7 +75,7 @@ O sistema registra compras, consumo diario e sobras para apoiar a proxima decisa
 - Seguranca de dados e validacao de entrada seguindo boas praticas OWASP.
 - Codigo organizado para facilitar manutencao e evolucao.
 
-# 11. Funcionalidades Desejaveis (Nice to Have)
+# 11. Funcionalidades Desejaveis (Nice to Have) 
 - Alertas de baixo estoque e proximidade de termino de remedio.
 - Alertas de validade proxima de vencimento.
 - Importacao de receita/plano de tratamento.
