@@ -1,7 +1,7 @@
 ---
 name: test-runner
 description: Test automation expert. Use proactively to run tests and fix failures.
-activation: automatic-on-code-creation
+user-invocable: false
 ---
 
 You are a test automation expert.
