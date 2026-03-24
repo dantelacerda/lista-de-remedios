@@ -36,6 +36,69 @@ Os Model Context Protocol (MCP) Servers configurados para este projeto são **op
   - Configuração: `.vscode/mcp.json`
   - Uso: `mcp_context7_query-docs`, `mcp_context7_resolve-library-id`
   - Útil para consultar versões e padrões de bibliotecas em tempo real
+  
+  **Exemplo de uso:**
+  ```
+  Pergunta ao agente: "Como usar Spring Boot 3.x para criar um controller REST?"
+  
+  O agente utilizará o Context7 para:
+  1. Resolver a versão correta da biblioteca (mcp_context7_resolve-library-id)
+  2. Buscar documentação atualizada com exemplos (mcp_context7_query-docs)
+  3. Retornar código seguindo os padrões mais recentes
+  ```
+
+- **GitHub MCP** — Integração com GitHub para gerenciamento de repositórios, branches, PRs e issues
+  - Configuração: Automática via GitHub CLI
+  - Uso: `mcp_github_*` (create_pull_request, list_issues, get_file_contents, etc.)
+  - Útil para automação de workflows, criar PRs, gerenciar issues e explorar repositórios
+  
+  **Exemplo de uso:**
+  ```
+  Pergunta ao agente: "Crie um pull request da branch feature-x para main com descrição"
+  
+  O agente utilizará o GitHub MCP para:
+  1. Criar o pull request (mcp_github_create_pull_request)
+  2. Adicionar descrição e labels (if needed)
+  3. Retornar o link do PR criado para review
+  
+  Outros casos de uso:
+  - Listar issues abertas: "Quais issues estão abertas no projeto?"
+  - Obter conteúdo de arquivos: "Leia o arquivo pom.xml"
+  - Listar branches: "Liste todas as branches do repositório"
+  - Gerenciar pull requests: "Faça merge do PR #2"
+  ```
+
+- **Excalidraw Diagram Generator** — Gerador de diagramas visuais em Excalidraw (Skill, não MCP)
+  - Instalação: [Smithery - Excalidraw Diagram Generator](https://smithery.ai/skills/github/excalidraw-diagram-generator)
+  - Uso: Pedir ao agente para criar diagramas usando linguagem natural
+  - Útil para visualizar arquiteturas, fluxos, relacionamentos e processos
+  
+  **Exemplo de uso:**
+  ```
+  Pergunta ao agente: "Crie um diagrama de contexto do sistema"
+  
+  O agente utilizará o Excalidraw Diagram Generator para:
+  1. Interpretar a descrição en linguagem natural
+  2. Gerar um arquivo .excalidraw com os elementos visuais
+  3. Retornar o arquivo pronto para abrir no Excalidraw
+  
+  Tipos de diagramas suportados:
+  - 📊 Flowcharts: processos sequenciais, workflows
+  - 🔗 Relationship Diagrams: relacionamentos entre entidades
+  - 🧠 Mind Maps: hierarquias de conceitos
+  - 🏗️ Architecture Diagrams: design de sistemas
+  - 📈 Data Flow Diagrams (DFD): fluxo de dados
+  - 🏊 Business Flow (Swimlane): processos entre atores
+  - 📦 Class Diagrams: design orientado a objetos
+  - 🔄 Sequence Diagrams: interações ao longo do tempo
+  - 🗃️ ER Diagrams: relacionamentos de banco de dados
+  
+  **Como usar o arquivo gerado:**
+  1. Acesse https://excalidraw.com
+  2. Clique em "Open" e selecione o arquivo `.excalidraw` gerado
+  3. Ou use a extensão Excalidraw no VS Code
+  4. Edite e customize conforme necessário
+  ```
 
 ## Subagents
 
